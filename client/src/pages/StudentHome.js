@@ -1,7 +1,6 @@
 import '../App.css'
-import { Routes, Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css'
-import Navbar from 'emerald-ui/lib/Navbar';
 import Button from 'emerald-ui/lib/Button';
 
 function StudentHome() {

@@ -14,9 +14,9 @@ function StudentHome() {
       <div style={{ paddingBottom: "10px" }} />
       <h1>Hello user1! (Account not implemented)</h1>
       <h3>STUDENT</h3>
-      <Link to="/rentbooks"><Button>Rent Books</Button></Link>
-      <Link to="/rentstudyrooms"><Button>Rent Study Room</Button></Link>
-      <Link to="/rentdevices"><Button>Rent Device</Button></Link>
+      <Link to="/rentbooks"><Button style={{padding: "5px"}}>Rent Books</Button></Link>
+      <Link to="/rentstudyrooms"><Button style={{padding: "5px"}}>Rent Study Room</Button></Link>
+      <Link to="/rentdevices"><Button style={{padding: "5px"}}>Rent Device</Button></Link>
     </div>
   );
 }

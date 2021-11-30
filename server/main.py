@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import utils
 import mysql.connector
@@ -50,4 +50,6 @@ async def list_books():
 async def get_book_by_id(book_id):
     cur.execute(f"SELECT * FROM BOOK WHERE book_id={book_id}")
     data = utils.dict_to_json(cur)
+    if not data:
+        raise HTTPException(status_code=404, detail="Book not found.")
     return data

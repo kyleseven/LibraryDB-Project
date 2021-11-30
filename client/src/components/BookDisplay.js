@@ -19,9 +19,11 @@ class BookDisplay extends React.Component {
 
   render() {
     return (
-      <CardGrid>
-        {this.state.books.map(book => <Card key={book.book_id}><Link to={"/book/" + book.book_id}><h2>{book.title}</h2></Link><br/>by {book.author}</Card>)}
-      </CardGrid>
+      <div style={{paddingLeft: "40px", paddingRight: "40px"}}>
+        <CardGrid>
+          {this.state.books.map(book => <Card key={book.book_id}><Link to={"/book/" + book.book_id}><h2>{book.title}</h2></Link><br />by {book.author}</Card>)}
+        </CardGrid>
+      </div>
     )
   }
 }

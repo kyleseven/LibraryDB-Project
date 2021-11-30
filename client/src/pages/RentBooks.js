@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import '../App.css'
 import { Routes, Link, Route } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css';
@@ -6,6 +7,10 @@ import Button from 'emerald-ui/lib/Button';
 import BookDisplay from '../components/BookDisplay';
 
 function RentBooks() {
+  useEffect(() => {
+    document.title = "Rent Books"
+  }, []);
+
   return (
     <div className="App">
       <SearchForm placeholder="Search for a Book"></SearchForm>

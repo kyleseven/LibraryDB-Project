@@ -16,6 +16,7 @@ function BookInfo() {
       setBookInfo(res.data);
       setLoading(false);
     });
+    document.title = "Book Info"
   }, [])
 
   if (isLoading) {

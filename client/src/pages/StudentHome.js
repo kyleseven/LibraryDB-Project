@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import '../App.css'
 import { Link } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css'
 import Button from 'emerald-ui/lib/Button';
 
 function StudentHome() {
+  useEffect(() => {
+    document.title = "Student Home"
+  }, []);
+
   return (
     <div className="App">
       <div style={{ paddingBottom: "10px" }} />

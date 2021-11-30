@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './App.css';
 import { Routes, Link, Route, BrowserRouter } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css'
@@ -11,6 +12,10 @@ import RentDevices from './pages/RentDevices';
 import BookInfo from './pages/BookInfo';
 
 function App() {
+  useEffect(() => {
+    document.title = "Library Database"
+  }, []);
+
   return (
     <div>
       <BrowserRouter>

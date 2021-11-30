@@ -52,4 +52,4 @@ async def get_book_by_id(book_id):
     data = utils.dict_to_json(cur)
     if not data:
         raise HTTPException(status_code=404, detail="Book not found.")
-    return data
+    return data[0]

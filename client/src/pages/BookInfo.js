@@ -31,15 +31,15 @@ function BookInfo() {
           Back to Search
         </Button>
       </Link>
-      <h1>{bookInfo[0].title}</h1>
+      <h1>{bookInfo.title}</h1>
       <p>
-        <b>Author:</b> {bookInfo[0].author}<br />
-        <b>Subject:</b> {bookInfo[0].subject}<br />
-        <b>Publisher:</b> {bookInfo[0].publisher}<br />
-        <b>Published:</b> <tt>{bookInfo[0].publication_date}</tt><br />
-        <b>Language:</b> <tt>{bookInfo[0].language_written_in}</tt><br />
-        <b>Physical Location:</b> <tt>{bookInfo[0].physical_location}</tt><br />
-        <b>ISBN-13:</b> <tt>{bookInfo[0].ISBN_13}</tt><br />
+        <b>Author:</b> {bookInfo.author}<br />
+        <b>Subject:</b> {bookInfo.subject}<br />
+        <b>Publisher:</b> {bookInfo.publisher}<br />
+        <b>Published:</b> <tt>{bookInfo.publication_date}</tt><br />
+        <b>Language:</b> <tt>{bookInfo.language_written_in}</tt><br />
+        <b>Physical Location:</b> <tt>{bookInfo.physical_location}</tt><br />
+        <b>ISBN-13:</b> <tt>{bookInfo.ISBN_13}</tt><br />
       </p>
       <Button color="warning">Rent Book (not implemented)</Button>
     </div>

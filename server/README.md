@@ -6,6 +6,7 @@
     - `pip3 install mysql-connector-python`
     - `pip3 install fastapi`
     - `pip3 install "uvicorn[standard]`
+    - `pip3 install python-multipart`
 
 2. `cd` to the `server` directory
 

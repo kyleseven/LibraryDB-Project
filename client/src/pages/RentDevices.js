@@ -3,6 +3,7 @@ import '../App.css'
 import { Link } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css'
 import SearchForm from 'emerald-ui/lib/SearchForm';
+import Button from 'emerald-ui/lib/Button'
 
 function RentDevices() {
   useEffect(() => {
@@ -12,7 +13,11 @@ function RentDevices() {
   return (
     <div className="App">
       <SearchForm placeholder="Search for a Device"></SearchForm>
-      <h1>Devices Go Here</h1>
+        <div style={{padding: "40px"}}>
+          <Button color="success">Rent Laptops</Button>
+          <Button color="success">Rent Projectors</Button>
+          <Button color="success">Rent Tablets</Button>
+        </div>
       <Link to="/">Back to Home</Link>
     </div>
   );

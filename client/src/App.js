@@ -10,6 +10,8 @@ import RentBooks from './pages/RentBooks';
 import RentStudyRooms from './pages/RentStudyRooms';
 import RentDevices from './pages/RentDevices';
 import BookInfo from './pages/BookInfo';
+import LibrarianHome from './pages/LibrarianHome';
+import AddBook from './pages/AddBook';
 
 function App() {
   useEffect(() => {
@@ -32,6 +34,8 @@ function App() {
         <Routes>
           {/* TODO Change the root to something else */}
           <Route path="/" element={<StudentHome />} />
+          <Route path="/lhome" element={<LibrarianHome />} />
+          <Route path="/addbook" element={<AddBook />} />
           <Route path="/rentbooks" element={<RentBooks />} />
           <Route path="/rentstudyrooms" element={<RentStudyRooms />} />
           <Route path="/rentdevices" element={<RentDevices />} />

@@ -41,7 +41,7 @@ function BookInfo() {
         <b>Physical Location:</b> <tt>{bookInfo.physical_location}</tt><br />
         <b>ISBN-13:</b> <tt>{bookInfo.ISBN_13}</tt><br />
       </p>
-      <Button color="warning">Rent Book (not implemented)</Button>
+      <Button color="success">Rent Book</Button>
     </div>
   );
 }

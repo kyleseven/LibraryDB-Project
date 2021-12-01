@@ -12,11 +12,12 @@ function StudentHome() {
   return (
     <div className="App">
       <div style={{ paddingBottom: "10px" }} />
-      <h1>Hello user1! (Account not implemented)</h1>
+      <h1>Hello user1!</h1>
       <h3>STUDENT</h3>
       <Link to="/rentbooks"><Button style={{padding: "5px"}}>Rent Books</Button></Link>
       <Link to="/rentstudyrooms"><Button style={{padding: "5px"}}>Rent Study Room</Button></Link>
       <Link to="/rentdevices"><Button style={{padding: "5px"}}>Rent Device</Button></Link>
+      <Button style={{padding: "5px"}} color="danger">Log Out</Button>
     </div>
   );
 }

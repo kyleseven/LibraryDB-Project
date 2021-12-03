@@ -1,8 +1,8 @@
 # Running The Database
 
-1. Install MariaDB
+1. Install MariaDB on your system.
 2. Run the MariaDB Service (platform dependent, Google for instructions)
-    - May not even be necessary, but it was necessary for macOS, at least
+    - May not even be necessary, but it was necessary for macOS, at least.
 3. Run `mysql`
     - You should see a screen like this:
 ```
@@ -16,7 +16,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 MariaDB [(none)]>
 ```
-4. Let's create the user that's used by the back end because for some reason, the root user doesn't work (don't forget semicolons)
+4. Create the user that's used by the back end.
     - `CREATE USER 'test'@'localhost' IDENTIFIED BY 'test';`
     - `GRANT ALL PRIVILEGES ON *.* TO 'test'@'localhost';`
     - `FLUSH PRIVILEGES;`
@@ -25,4 +25,7 @@ MariaDB [(none)]>
     - `source /path/to/LibraryDB-Project/database/construction.sql`
     - `source /path/to/LibraryDB-Project/database/populate.sql`
 
-6. You may now `exit`... or leave it on if it makes you feel better.
+6. Exit the MariaDB monitor. (Leave the service running)
+    - `exit`
+
+7. Stop the MariaDB service when finished.

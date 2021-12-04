@@ -5,6 +5,7 @@ import 'emerald-ui/lib/styles.css'
 import Nav from 'emerald-ui/lib/Nav'
 import Navbar from 'emerald-ui/lib/Navbar';
 
+import Login from './pages/Login';
 import StudentHome from './pages/StudentHome';
 import RentBooks from './pages/RentBooks';
 import RentStudyRooms from './pages/RentStudyRooms';
@@ -32,6 +33,7 @@ function App() {
         <Routes>
           {/* TODO Change the root to something else */}
           <Route path="/" element={<StudentHome />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/rentbooks" element={<RentBooks />} />
           <Route path="/rentstudyrooms" element={<RentStudyRooms />} />
           <Route path="/rentdevices" element={<RentDevices />} />

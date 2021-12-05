@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from enum import Enum
 from typing import Optional
 from wsgiref import headers
 from fastapi import FastAPI, HTTPException, status, Depends
@@ -71,6 +72,12 @@ class User(BaseModel):
     password: str
 
 
+class AccountType(Enum):
+    STUDENT = 1
+    LIBRARIAN = 2
+    BURSAR = 3
+
+
 def get_user_from_username(username: str):
     cur.execute(f"SELECT * FROM ACCOUNT WHERE username=\"{username}\"")
     data = utils.dict_to_json(cur)
@@ -82,6 +89,25 @@ def get_user_from_username(username: str):
         username=data[0]["username"],
         password=data[0]["password"]
     )
+
+
+def get_user_account_type(current_user: User):
+    cur.execute(f"SELECT * FROM STUDENT_ACCOUNT WHERE account_id={current_user.account_id}")
+    data = utils.dict_to_json(cur)
+    print("\naccdata")
+    print(data)
+    if data:
+        return AccountType.STUDENT
+
+    cur.execute(f"SELECT * FROM EMPLOYEE_ACCOUNT, EMPLOYEE, LIBRARIAN WHERE LIBRARIAN.employee_id=EMPLOYEE.employee_id AND EMPLOYEE.account_id={current_user.account_id}")
+    data = utils.dict_to_json(cur)
+    if data:
+        return AccountType.LIBRARIAN
+
+    cur.execute(f"SELECT * FROM EMPLOYEE_ACCOUNT, EMPLOYEE, BURSAR WHERE BURSAR.employee_id=EMPLOYEE.employee_id AND EMPLOYEE.account_id={current_user.account_id}")
+    data = utils.dict_to_json(cur)
+    if data:
+        return AccountType.BURSAR
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
@@ -223,3 +249,14 @@ async def get_username(current_user: User = Depends(get_current_user)):
     return {
         "username": current_user.username
     }
+
+
+@app.get("/user/me/items")
+async def get_rented_items(current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.STUDENT:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    cur.execute(f"SELECT rented_book, rented_study_room, rented_device FROM STUDENT WHERE account_id={current_user.account_id}")
+    data = utils.dict_to_json(cur)
+
+    return data[0]

@@ -1179,7 +1179,7 @@ VALUES (
     'Ruby Cookbook',
     'Lucas Carlson/Leonard Richardson',
     '000.000',
-    'O'Reilly Media',
+    'OReilly Media',
     'Placeholder',
     '2006-07-29',
     'en',

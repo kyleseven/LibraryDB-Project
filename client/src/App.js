@@ -11,6 +11,7 @@ import RentBooks from './pages/RentBooks';
 import RentStudyRooms from './pages/RentStudyRooms';
 import RentDevices from './pages/RentDevices';
 import BookInfo from './pages/BookInfo';
+import StudyRoomInfo from './pages/StudyRoomInfo';
 
 function App() {
   useEffect(() => {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/rentstudyrooms" element={<RentStudyRooms />} />
           <Route path="/rentdevices" element={<RentDevices />} />
           <Route path="/book/:book_id" element={<BookInfo />} />
+          <Route path="/studyroom/:room_no" element={<StudyRoomInfo />} />
         </Routes>
       </BrowserRouter>
     </div>

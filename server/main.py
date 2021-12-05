@@ -182,6 +182,22 @@ async def get_book_id_by_title(book_title: str, current_user: User = Depends(get
     }
 
 
+@app.get("/studyrooms")
+async def list_study_rooms(current_user: User = Depends(get_current_user)):
+    cur.execute("SELECT * FROM STUDY_ROOM WHERE is_rented=false")
+    data = utils.dict_to_json(cur)
+
+    return data
+
+
+@app.get("/studyroom/{room_no}")
+async def get_study_room_by_room_no(room_no: int, current_user: User = Depends(get_current_user)):
+    cur.execute(f"SELECT * FROM STUDY_ROOM WHERE room_no={room_no}")
+    data = utils.dict_to_json(cur)
+
+    return data[0]
+
+
 @app.get("/user/me/username")
 async def get_username(current_user: User = Depends(get_current_user)):
     return {

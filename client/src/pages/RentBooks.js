@@ -1,20 +1,37 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import '../App.css'
-import { Routes, Link, Route } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css';
 import SearchForm from 'emerald-ui/lib/SearchForm';
-import Button from 'emerald-ui/lib/Button';
 import BookDisplay from '../components/BookDisplay';
+import axios from 'axios';
 
 function RentBooks() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "Rent Books"
   }, []);
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    axios.get(`http://localhost:8000/book/title/${searchQuery}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+      .then(res => {
+          navigate(`/book/${res.data.book_id}`);
+        }
+      )
+      .catch(() => { alert("Book not found."); })
+  }
+
+  const onChange = (e) => {
+    setSearchQuery(e.target.value);
+  }
+
   return (
     <div className="App">
-      <SearchForm placeholder="Search for a Book"></SearchForm>
-      <BookDisplay/>
+      <SearchForm inputId="bookSearch" placeholder="Search for a Book" onSubmit={onSubmit} onChange={onChange} clearable></SearchForm>
+      <BookDisplay />
       <Link to="/">Back to Home</Link>
     </div>
   );

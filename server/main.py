@@ -194,6 +194,8 @@ async def list_study_rooms(current_user: User = Depends(get_current_user)):
 async def get_study_room_by_room_no(room_no: int, current_user: User = Depends(get_current_user)):
     cur.execute(f"SELECT * FROM STUDY_ROOM WHERE room_no={room_no}")
     data = utils.dict_to_json(cur)
+    if not data:
+        raise HTTPException(status_code=404, detail="Device not found.")
 
     return data[0]
 

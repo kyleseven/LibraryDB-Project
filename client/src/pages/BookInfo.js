@@ -12,7 +12,8 @@ function BookInfo() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/book/${book_id}`).then(res => {
+    axios.get(`http://localhost:8000/book/${book_id}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    .then(res => {
       setBookInfo(res.data);
       setLoading(false);
     });

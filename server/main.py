@@ -77,7 +77,11 @@ def get_user_from_username(username: str):
     if not data:
         return None
 
-    return data[0]
+    return User(
+        account_id=data[0]["account_id"],
+        username=data[0]["username"],
+        password=data[0]["password"]
+    )
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
@@ -98,7 +102,7 @@ def authenticate_user(username: str, password: str):
 
     if not user:
         return False
-    if not user["password"] == password:
+    if not user.password == password:
         return False
 
     return user
@@ -141,7 +145,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user["username"]}, expires_delta=access_token_expires
+        data={"sub": user.username}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
@@ -152,15 +156,23 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 #
 #
 @app.get("/books")
-async def list_books():
+async def list_books(current_user: User = Depends(get_current_user)):
     cur.execute("SELECT * FROM BOOK")
     data = utils.dict_to_json(cur)
     return data
 
+
 @app.get("/book/{book_id}")
-async def get_book_by_id(book_id):
+async def get_book_by_id(book_id: int, current_user: User = Depends(get_current_user)):
     cur.execute(f"SELECT * FROM BOOK WHERE book_id={book_id}")
     data = utils.dict_to_json(cur)
     if not data:
         raise HTTPException(status_code=404, detail="Book not found.")
     return data[0]
+
+
+@app.get("/user/me/username")
+async def get_username(current_user: User = Depends(get_current_user)):
+    return {
+        "username": current_user.username
+    }

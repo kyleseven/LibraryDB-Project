@@ -198,6 +198,24 @@ async def get_study_room_by_room_no(room_no: int, current_user: User = Depends(g
     return data[0]
 
 
+@app.get("/devices")
+async def list_devices(current_user: User = Depends(get_current_user)):
+    cur.execute("SELECT * FROM DEVICE WHERE is_rented=false")
+    data = utils.dict_to_json(cur)
+
+    return data
+
+
+@app.get("/device/{device_id}")
+async def get_device_by_id(device_id: int, current_user: User = Depends(get_current_user)):
+    cur.execute(f"SELECT * FROM DEVICE WHERE device_id={device_id}")
+    data = utils.dict_to_json(cur)
+    if not data:
+        raise HTTPException(status_code=404, detail="Device not found.")
+
+    return data[0]
+
+
 @app.get("/user/me/username")
 async def get_username(current_user: User = Depends(get_current_user)):
     return {

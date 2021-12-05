@@ -176,11 +176,16 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-#
-#
-# API
-#
-#
+###############
+#             #
+#     API     #
+#             #
+###############
+
+
+#########
+# BOOKS #
+#########
 @app.get("/books")
 async def list_books(current_user: User = Depends(get_current_user)):
     cur.execute("SELECT * FROM BOOK")
@@ -208,6 +213,9 @@ async def get_book_id_by_title(book_title: str, current_user: User = Depends(get
     }
 
 
+###############
+# STUDY ROOMS #
+###############
 @app.get("/studyrooms")
 async def list_study_rooms(current_user: User = Depends(get_current_user)):
     cur.execute("SELECT * FROM STUDY_ROOM WHERE is_rented=false")
@@ -226,6 +234,9 @@ async def get_study_room_by_room_no(room_no: int, current_user: User = Depends(g
     return data[0]
 
 
+###########
+# DEVICES #
+###########
 @app.get("/devices")
 async def list_devices(current_user: User = Depends(get_current_user)):
     cur.execute("SELECT * FROM DEVICE WHERE is_rented=false")

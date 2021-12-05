@@ -3,11 +3,13 @@ import 'emerald-ui/lib/styles.css';
 import axios from 'axios';
 import TextField from 'emerald-ui/lib/TextField';
 import Button from 'emerald-ui/lib/Button';
+import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import qs from 'query-string';
 
 function Login() {
   const { control, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     data = {
@@ -18,6 +20,7 @@ function Login() {
     axios.post("http://localhost:8000/token", qs.stringify(data)).then(res => {
       sessionStorage.setItem("token", res.data.access_token);
       alert("Successfully logged in!");
+      navigate("/");
     }).catch(error => { alert(error.response.data.detail); })
   }
 

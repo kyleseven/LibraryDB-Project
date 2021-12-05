@@ -173,7 +173,7 @@ async def get_book_by_id(book_id: int, current_user: User = Depends(get_current_
 
 @app.get("/book/title/{book_title}")
 async def get_book_id_by_title(book_title: str, current_user: User = Depends(get_current_user)):
-    cur.execute(f"SELECT * FROM BOOK WHERE title=\"{book_title}\"")
+    cur.execute(f"SELECT * FROM BOOK WHERE title LIKE \"%{book_title}%\"")
     data = utils.dict_to_json(cur)
     if not data:
         raise HTTPException(status_code=404, detail="Book not found.")

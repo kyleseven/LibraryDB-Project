@@ -19,7 +19,6 @@ function Login() {
     }
     axios.post("http://localhost:8000/token", qs.stringify(data)).then(res => {
       sessionStorage.setItem("token", res.data.access_token);
-      alert("Successfully logged in!");
       navigate("/");
     }).catch(error => { alert(error.response.data.detail); })
   }

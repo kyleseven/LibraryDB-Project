@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../App.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css';
 import Button from 'emerald-ui/lib/Button';
 import Icon from 'emerald-ui/lib/Icon'
 
 function DeviceInfo() {
   const { device_id } = useParams();
+  const navigate = useNavigate();
   const [deviceInfo, setDeviceInfo] = useState();
   const [isLoading, setLoading] = useState(true);
 
@@ -25,6 +26,14 @@ function DeviceInfo() {
     return <div className="App">Loading...</div>;
   }
 
+  const rentDevice = () => {
+    axios.post(`http://localhost:8000/rent/device/${deviceInfo.device_id}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    .then(() => {
+      alert(`You've rented Device ID #${deviceInfo.device_id}`);
+      navigate("/");
+    }).catch(error => { alert(error.response.data.detail); })
+  }
+
   return (
     <div style={{ padding: "40px" }}>
       <Link to="/rentdevices">
@@ -37,7 +46,7 @@ function DeviceInfo() {
       <p>
         <b>Type:</b> {deviceInfo.type}<br />
       </p>
-      <Button color="warning">Rent Device (not impl)</Button>
+      <Button color="info" onClick={rentDevice}>Rent Device</Button>
     </div>
   );
 }

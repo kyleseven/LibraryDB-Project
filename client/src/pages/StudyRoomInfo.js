@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../App.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css';
 import Button from 'emerald-ui/lib/Button';
 import Icon from 'emerald-ui/lib/Icon'
 
 function StudyRoomInfo() {
   const { room_no } = useParams();
+  const navigate = useNavigate();
   const [studyRoomInfo, setStudyRoomInfo] = useState();
   const [isLoading, setLoading] = useState(true);
 
@@ -25,6 +26,14 @@ function StudyRoomInfo() {
     return <div className="App">Loading...</div>;
   }
 
+  const rentStudyRoom = () => {
+    axios.post(`http://localhost:8000/rent/studyroom/${studyRoomInfo.room_no}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    .then(() => {
+      alert(`You've rented Study Room #${studyRoomInfo.room_no}`);
+      navigate("/");
+    }).catch(error => { alert(error.response.data.detail); })
+  }
+
   return (
     <div style={{ padding: "40px" }}>
       <Link to="/rentstudyrooms">
@@ -34,7 +43,7 @@ function StudyRoomInfo() {
         </Button>
       </Link>
       <h1>Study Room #{studyRoomInfo.room_no}</h1>
-      <Button color="warning">Rent Study Room (not impl)</Button>
+      <Button color="info" onClick={rentStudyRoom}>Rent Study Room</Button>
     </div>
   );
 }

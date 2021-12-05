@@ -188,7 +188,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 #########
 @app.get("/books")
 async def list_books(current_user: User = Depends(get_current_user)):
-    cur.execute("SELECT * FROM BOOK")
+    cur.execute("SELECT * FROM BOOK WHERE is_rented=false")
     data = utils.dict_to_json(cur)
     return data
 
@@ -204,13 +204,27 @@ async def get_book_by_id(book_id: int, current_user: User = Depends(get_current_
 
 @app.get("/book/title/{book_title}")
 async def get_book_id_by_title(book_title: str, current_user: User = Depends(get_current_user)):
-    cur.execute(f"SELECT * FROM BOOK WHERE title LIKE \"%{book_title}%\"")
+    cur.execute(f"SELECT * FROM BOOK WHERE title LIKE \"%{book_title}%\" AND is_rented=false")
     data = utils.dict_to_json(cur)
     if not data:
         raise HTTPException(status_code=404, detail="Book not found.")
     return {
         "book_id": data[0]["book_id"]
     }
+
+
+@app.post("/rent/book/{book_id}")
+async def rent_book_by_id(book_id: int, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.STUDENT:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    if utils.student_already_rented(cur, "book", current_user.account_id):
+        raise HTTPException(status_code=401, detail="Return your current book before renting another.")
+
+    cur.execute(f"UPDATE BOOK SET is_rented=true WHERE book_id={book_id}")
+    cur.execute(f"UPDATE STUDENT SET rented_book={book_id} WHERE account_id={current_user.account_id}")
+    conn.commit()
+    return book_id
 
 
 ###############
@@ -234,6 +248,20 @@ async def get_study_room_by_room_no(room_no: int, current_user: User = Depends(g
     return data[0]
 
 
+@app.post("/rent/studyroom/{room_no}")
+async def rent_study_room_by_room_no(room_no: int, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.STUDENT:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    if utils.student_already_rented(cur, "study_room", current_user.account_id):
+        raise HTTPException(status_code=401, detail="Return your current study room before renting another.")
+
+    cur.execute(f"UPDATE STUDY_ROOM SET is_rented=true WHERE room_no={room_no}")
+    cur.execute(f"UPDATE STUDENT SET rented_study_room={room_no} WHERE account_id={current_user.account_id}")
+    conn.commit()
+    return
+
+
 ###########
 # DEVICES #
 ###########
@@ -253,6 +281,20 @@ async def get_device_by_id(device_id: int, current_user: User = Depends(get_curr
         raise HTTPException(status_code=404, detail="Device not found.")
 
     return data[0]
+
+
+@app.post("/rent/device/{device_id}")
+async def rent_device_by_id(device_id: int, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.STUDENT:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    if utils.student_already_rented(cur, "device", current_user.account_id):
+        raise HTTPException(status_code=401, detail="Return your current device before renting another.")
+
+    cur.execute(f"UPDATE DEVICE SET is_rented=true WHERE device_id={device_id}")
+    cur.execute(f"UPDATE STUDENT SET rented_device={device_id} WHERE account_id={current_user.account_id}")
+    conn.commit()
+    return
 
 
 @app.get("/user/me/username")

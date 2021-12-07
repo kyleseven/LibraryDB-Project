@@ -89,7 +89,7 @@ function ReturnItemsDisplay() {
       <h1>Return Items</h1>
       <Button style={{ padding: "5px" }} onClick={returnBook}>Return Book</Button>
       <Button style={{ padding: "5px" }} onClick={returnStudyRoom}>Return Study Room</Button>
-      <Button style={{ padding: "5px" }} onClick={returnDevice}>Rent Device</Button>
+      <Button style={{ padding: "5px" }} onClick={returnDevice}>Return Device</Button>
     </div>
   )
 }

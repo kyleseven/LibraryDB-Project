@@ -14,6 +14,7 @@ import BookInfo from './pages/BookInfo';
 import StudyRoomInfo from './pages/StudyRoomInfo';
 import DeviceInfo from './pages/DeviceInfo';
 import ReturnItems from './pages/ReturnItems';
+import LibrarianHome from './pages/LibrarianHome';
 
 function App() {
   const [homeLink, setHomeLink] = useState("/");
@@ -37,8 +38,8 @@ function App() {
         </Navbar>
         {/* When adding a new page, add a Route */}
         <Routes>
-          {/* TODO Change the root to something else */}
           <Route path="/" element={<Login setHomeLink={setHomeLink}/>} />
+          {/* Student Routes */}
           <Route path="/studenthome" element={<StudentHome />} />
           <Route path="/rentbooks" element={<RentBooks />} />
           <Route path="/rentstudyrooms" element={<RentStudyRooms />} />
@@ -47,6 +48,8 @@ function App() {
           <Route path="/book/:book_id" element={<BookInfo />} />
           <Route path="/studyroom/:room_no" element={<StudyRoomInfo />} />
           <Route path="/device/:device_id" element={<DeviceInfo />} />
+          {/* Librarian Routes */}
+          <Route path="/librarianhome" element={<LibrarianHome />} />
         </Routes>
       </BrowserRouter>
     </div>

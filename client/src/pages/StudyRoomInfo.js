@@ -20,7 +20,7 @@ function StudyRoomInfo() {
       setLoading(false);
     });
     document.title = "Study Room Info"
-  }, [])
+  }, [room_no])
 
   if (isLoading) {
     return <div className="App">Loading...</div>;

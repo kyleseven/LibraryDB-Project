@@ -19,7 +19,7 @@ function BookInfo() {
       setLoading(false);
     });
     document.title = "Book Info"
-  }, [])
+  }, [book_id])
 
   if (isLoading) {
     return <div className="App">Loading...</div>;
@@ -28,7 +28,7 @@ function BookInfo() {
   const rentBook = () => {
     axios.post(`http://localhost:8000/rent/book/${bookInfo.book_id}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
-      alert(`Book Rented! \"${bookInfo.title}\" is yours to borrow.`);
+      alert(`Book Rented! "${bookInfo.title}" is yours to borrow.`);
       navigate("/studenthome");
     }).catch(error => { alert(error.response.data.detail); })
   }

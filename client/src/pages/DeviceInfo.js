@@ -20,7 +20,7 @@ function DeviceInfo() {
       setLoading(false);
     });
     document.title = "Device Info"
-  }, [])
+  }, [device_id])
 
   if (isLoading) {
     return <div className="App">Loading...</div>;

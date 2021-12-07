@@ -95,8 +95,6 @@ def get_user_from_username(username: str):
 def get_user_account_type(current_user: User):
     cur.execute(f"SELECT * FROM STUDENT_ACCOUNT WHERE account_id={current_user.account_id}")
     data = utils.dict_to_json(cur)
-    print("\naccdata")
-    print(data)
     if data:
         return AccountType.STUDENT
 
@@ -124,8 +122,6 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 def authenticate_user(username: str, password: str):
     user = get_user_from_username(username)
-    print("\n\n\n")
-    print(user)
 
     if not user:
         return False

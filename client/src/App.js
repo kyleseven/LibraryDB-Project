@@ -17,6 +17,7 @@ import ReturnItems from './pages/ReturnItems';
 import LibrarianHome from './pages/LibrarianHome';
 import AddBook from './pages/AddBook';
 import AddDevice from './pages/AddDevice';
+import StudentInfo from './pages/StudentInfo';
 
 function App() {
   const [homeLink, setHomeLink] = useState("/");
@@ -43,6 +44,7 @@ function App() {
           <Route path="/" element={<Login setHomeLink={setHomeLink}/>} />
           {/* Student Routes */}
           <Route path="/studenthome" element={<StudentHome />} />
+          <Route path="/studentinfo" element={<StudentInfo />} />
           <Route path="/rentbooks" element={<RentBooks />} />
           <Route path="/rentstudyrooms" element={<RentStudyRooms />} />
           <Route path="/rentdevices" element={<RentDevices />} />

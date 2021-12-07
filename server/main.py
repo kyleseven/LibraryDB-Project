@@ -426,3 +426,14 @@ async def get_rented_items(current_user: User = Depends(get_current_user)):
     data = utils.dict_to_json(cur)
 
     return data[0]
+
+
+@app.get("/user/student/info")
+async def get_student_info(current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.STUDENT:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    cur.execute(f"SELECT * FROM STUDENT WHERE account_id={current_user.account_id}")
+    data = utils.dict_to_json(cur)
+
+    return data[0]

@@ -36,6 +36,7 @@ function StudentHome() {
       <Link to="/rentstudyrooms"><Button style={{ padding: "5px" }}>Rent Study Room</Button></Link>
       <Link to="/rentdevices"><Button style={{ padding: "5px" }}>Rent Device</Button></Link>
       <Link to="/returnitems"><Button style={{ padding: "5px" }} color="info">Return Items</Button></Link>
+      <Link to="/studentinfo"><Button style={{ padding: "5px" }} color="success">Student Info</Button></Link>
       <Link to="/"><Button style={{ padding: "5px" }} color="danger">Log Out</Button></Link>
     </div>
   );

@@ -19,3 +19,8 @@ class Device(BaseModel):
     device_id: Optional[int]
     type: str
     is_rented: bool = False
+
+
+class Student(BaseModel):
+    name: str
+    address: str

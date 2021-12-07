@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from jose import JWTError, jwt
-from models import Book, Device
+from models import Book, Device, Student
 import utils
 import mysql.connector
 import json
@@ -433,3 +433,17 @@ async def get_student_info(current_user: User = Depends(get_current_user)):
     data = utils.dict_to_json(cur)
 
     return data[0]
+
+@app.post("/user/student/info/update")
+async def update_student_info(student: Student, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.STUDENT:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    try:
+        cur.execute(f"UPDATE STUDENT SET name='{student.name}' WHERE account_id={current_user.account_id}")
+        cur.execute(f"UPDATE STUDENT SET address='{student.address}' WHERE account_id={current_user.account_id}")
+        conn.commit()
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=400, detail=f"Database Error: {err}")
+
+    return student

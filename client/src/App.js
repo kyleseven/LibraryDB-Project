@@ -18,6 +18,7 @@ import LibrarianHome from './pages/LibrarianHome';
 import AddBook from './pages/AddBook';
 import AddDevice from './pages/AddDevice';
 import StudentInfo from './pages/StudentInfo';
+import UpdateStudentInfo from './pages/UpdateStudentInfo';
 
 function App() {
   const [homeLink, setHomeLink] = useState("/");
@@ -45,6 +46,7 @@ function App() {
           {/* Student Routes */}
           <Route path="/studenthome" element={<StudentHome />} />
           <Route path="/studentinfo" element={<StudentInfo />} />
+          <Route path="/studentinfo/update" element={<UpdateStudentInfo />} />
           <Route path="/rentbooks" element={<RentBooks />} />
           <Route path="/rentstudyrooms" element={<RentStudyRooms />} />
           <Route path="/rentdevices" element={<RentDevices />} />

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 import 'emerald-ui/lib/styles.css';
+import Button from 'emerald-ui/lib/Button';
 
 function StudentInfo() {
   const [studentInfo, setStudentInfo] = useState();
@@ -27,6 +29,7 @@ function StudentInfo() {
         <b>Name:</b> {studentInfo.name}<br />
         <b>Address:</b> {studentInfo.address}<br />
       </p>
+      <Link to="/studentinfo/update"><Button color="info">Update Info</Button></Link>
     </div>
   );
 }

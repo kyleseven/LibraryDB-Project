@@ -28,7 +28,7 @@ function AddDevice() {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Device Type / Description"
               />
             )

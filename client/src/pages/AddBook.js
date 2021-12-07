@@ -28,7 +28,7 @@ function AddBook() {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Book Title"
               />
             )
@@ -41,7 +41,7 @@ function AddBook() {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Author"
               />
             )
@@ -54,7 +54,7 @@ function AddBook() {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Physical Location"
               />
             )
@@ -67,7 +67,7 @@ function AddBook() {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Publisher"
               />
             )
@@ -80,7 +80,7 @@ function AddBook() {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Subject"
               />
             )
@@ -93,7 +93,7 @@ function AddBook() {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Publication Date (YYYY-MM-DD)"
               />
             )
@@ -106,7 +106,7 @@ function AddBook() {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Language Code"
               />
             )
@@ -119,7 +119,7 @@ function AddBook() {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="ISBN-13"
               />
             )

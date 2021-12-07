@@ -50,7 +50,7 @@ function Login({ setHomeLink }) {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Username"
               />
             )
@@ -63,7 +63,7 @@ function Login({ setHomeLink }) {
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value}
+                value={value || ""}
                 label="Password"
                 type="password"
               />

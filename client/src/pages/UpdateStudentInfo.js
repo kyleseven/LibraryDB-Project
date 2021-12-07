@@ -41,12 +41,13 @@ function UpdateStudentInfo() {
         <Controller
           name="name"
           control={control}
+          rules={{ required: true }}
           defaultValue={studentInfo.name}
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Name"
               />
             )
@@ -55,12 +56,13 @@ function UpdateStudentInfo() {
         <Controller
           name="address"
           control={control}
+          rules={{ required: true }}
           defaultValue={studentInfo.address}
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Address"
               />
             )

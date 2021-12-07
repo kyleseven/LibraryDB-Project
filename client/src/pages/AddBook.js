@@ -24,11 +24,13 @@ function AddBook() {
         <Controller
           name="title"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Book Title"
               />
             )
@@ -37,11 +39,13 @@ function AddBook() {
         <Controller
           name="author"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Author"
               />
             )
@@ -50,11 +54,13 @@ function AddBook() {
         <Controller
           name="physical_location"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Physical Location"
               />
             )
@@ -63,11 +69,13 @@ function AddBook() {
         <Controller
           name="publisher"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Publisher"
               />
             )
@@ -76,11 +84,13 @@ function AddBook() {
         <Controller
           name="subject"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Subject"
               />
             )
@@ -89,11 +99,13 @@ function AddBook() {
         <Controller
           name="publication_date"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Publication Date (YYYY-MM-DD)"
               />
             )
@@ -102,11 +114,13 @@ function AddBook() {
         <Controller
           name="language_written_in"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Language Code"
               />
             )
@@ -115,11 +129,13 @@ function AddBook() {
         <Controller
           name="ISBN_13"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="ISBN-13"
               />
             )

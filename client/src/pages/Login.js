@@ -45,11 +45,13 @@ function Login({ setHomeLink }) {
         <Controller
           name="username"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Username"
               />
             )
@@ -58,11 +60,13 @@ function Login({ setHomeLink }) {
         <Controller
           name="password"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Password"
                 type="password"
               />

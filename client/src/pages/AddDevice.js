@@ -24,11 +24,13 @@ function AddDevice() {
         <Controller
           name="type"
           control={control}
+          rules={{ required: true }}
+          defaultValue=""
           render={
             ({ field: { onChange, value } }) => (
               <TextField
                 onChange={onChange}
-                value={value || ""}
+                value={value}
                 label="Device Type / Description"
               />
             )

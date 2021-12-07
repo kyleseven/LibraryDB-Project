@@ -15,7 +15,6 @@ function StudyRoomInfo() {
   useEffect(() => {
     axios.get(`http://localhost:8000/studyroom/${room_no}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(res => {
-      console.log(res.data);
       setStudyRoomInfo(res.data);
       setLoading(false);
     });

@@ -22,7 +22,6 @@ function Login({ setHomeLink }) {
       let homeLink = "";
       axios.get("http://localhost:8000/user/me/account_type", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
         .then(res => {
-          console.log(res.data);
           if (res.data.account_type === "AccountType.STUDENT") {
             homeLink = "/studenthome";
             setHomeLink(homeLink);

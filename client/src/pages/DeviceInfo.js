@@ -15,7 +15,6 @@ function DeviceInfo() {
   useEffect(() => {
     axios.get(`http://localhost:8000/device/${device_id}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(res => {
-      console.log(res.data);
       setDeviceInfo(res.data);
       setLoading(false);
     });

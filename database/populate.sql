@@ -1,19 +1,19 @@
 INSERT INTO ACCOUNT (username, password)
 VALUES (
-    'user1',
-    'test'
+    'librarian1',
+    'password'
 );
 
 INSERT INTO ACCOUNT (username, password)
 VALUES (
-    'user2',
-    'test'
+    'student1',
+    'password'
 );
 
 INSERT INTO ACCOUNT (username, password)
 VALUES (
-    'user3',
-    'test'
+    'student2',
+    'password'
 );
 
 /*
@@ -45,19 +45,16 @@ VALUES (
     1
 );
 
--- Creating Bursar Employee with account_id 2
-INSERT INTO EMPLOYEE_ACCOUNT (account_id)
+-- Creating Student with account_id 2
+INSERT INTO STUDENT_ACCOUNT (account_id)
 VALUES (
     2
 );
 
-INSERT INTO EMPLOYEE (account_id)
+INSERT INTO STUDENT (name, address, account_id)
 VALUES (
-    2
-);
-
-INSERT INTO BURSAR (employee_id)
-VALUES (
+    'Joe Biden',
+    '1600 Pennsylvania Avenue NW, Washington, DC 20500',
     2
 );
 
@@ -107,13 +104,19 @@ VALUES (2);
 INSERT INTO FINING_SYSTEM (order_id)
 VALUES (3);
 
-INSERT INTO DEVICE
-VALUES ();
+INSERT INTO DEVICE (type)
+VALUES ('Laptop');
 
-INSERT INTO DEVICE
-VALUES ();
+INSERT INTO DEVICE (type)
+VALUES ('Projector');
 
-INSERT INTO DEVICE
+INSERT INTO DEVICE (type)
+VALUES ('Webcam');
+
+INSERT INTO DEVICE (type)
+VALUES ('Calculator');
+
+INSERT INTO STUDY_ROOM
 VALUES ();
 
 INSERT INTO STUDY_ROOM

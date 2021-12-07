@@ -358,6 +358,13 @@ async def get_username(current_user: User = Depends(get_current_user)):
     }
 
 
+@app.get("/user/me/account_type")
+async def get_account_type(current_user: User = Depends(get_current_user)):
+    return {
+        "account_type": str(get_user_account_type(current_user))
+    }
+
+
 @app.get("/user/me/items")
 async def get_rented_items(current_user: User = Depends(get_current_user)):
     if get_user_account_type(current_user) != AccountType.STUDENT:

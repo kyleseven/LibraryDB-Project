@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { Routes, Link, Route, BrowserRouter } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css'
@@ -16,6 +16,9 @@ import DeviceInfo from './pages/DeviceInfo';
 import ReturnItems from './pages/ReturnItems';
 
 function App() {
+  const [homeLink, setHomeLink] = useState("/");
+
+
   useEffect(() => {
     document.title = "Library Database"
   }, []);
@@ -29,14 +32,14 @@ function App() {
             <h1 style={{ margin: "auto" }}>Library Database</h1>
           </Navbar.Brand>
           <Nav grow collapsible>
-            <Link to="/">Home</Link>
+            <Link to={homeLink}>Home</Link>
           </Nav>
         </Navbar>
         {/* When adding a new page, add a Route */}
         <Routes>
           {/* TODO Change the root to something else */}
-          <Route path="/" element={<StudentHome />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login setHomeLink={setHomeLink}/>} />
+          <Route path="/studenthome" element={<StudentHome />} />
           <Route path="/rentbooks" element={<RentBooks />} />
           <Route path="/rentstudyrooms" element={<RentStudyRooms />} />
           <Route path="/rentdevices" element={<RentDevices />} />

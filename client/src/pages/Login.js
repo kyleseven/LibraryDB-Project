@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import qs from 'query-string';
 
-function Login() {
+function Login({ setHomeLink }) {
   const { control, handleSubmit } = useForm();
   const navigate = useNavigate();
 
@@ -19,7 +19,23 @@ function Login() {
     }
     axios.post("http://localhost:8000/token", qs.stringify(data)).then(res => {
       sessionStorage.setItem("token", res.data.access_token);
-      navigate("/");
+      let homeLink = "";
+      axios.get("http://localhost:8000/user/me/account_type", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+        .then(res => {
+          console.log(res.data);
+          if (res.data.account_type === "AccountType.STUDENT") {
+            homeLink = "/studenthome";
+            setHomeLink(homeLink);
+          }
+          else if (res.data.account_type === "AccountType.LIBRARIAN") {
+            homeLink = "/librarianhome";
+            setHomeLink(homeLink);
+          }
+          else {
+            alert("Invalid account type.")
+          }
+          navigate(homeLink);
+        });
     }).catch(error => { alert(error.response.data.detail); })
   }
 

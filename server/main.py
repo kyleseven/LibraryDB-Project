@@ -318,6 +318,22 @@ async def return_study_room_by_room_no(room_no: int, current_user: User = Depend
     return room_no
 
 
+@app.post("/add/study_room")
+async def add_study_room(current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.LIBRARIAN:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    query = "INSERT INTO STUDY_ROOM VALUES ()"
+
+    try:
+        cur.execute(query)
+        conn.commit()
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=400, detail=f"Database Error: {err}")
+
+    return
+
+
 ###########
 # DEVICES #
 ###########

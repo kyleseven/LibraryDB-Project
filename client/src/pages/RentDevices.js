@@ -12,7 +12,6 @@ function RentDevices() {
 
   return (
     <div className="App">
-      <SearchForm placeholder="Search for a Device"></SearchForm>
       <DeviceDisplay />
     </div>
   );

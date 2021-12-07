@@ -1215,7 +1215,7 @@ VALUES (
     'Rails Cookbook: Recipes for Rapid Web Development with Ruby',
     'Rob Orsini',
     '000.000',
-    'O'Reilly Media',
+    'OReilly Media',
     'Placeholder',
     '2007-01-01',
     'en',

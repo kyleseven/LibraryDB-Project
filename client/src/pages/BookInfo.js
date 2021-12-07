@@ -29,7 +29,7 @@ function BookInfo() {
     axios.post(`http://localhost:8000/rent/book/${bookInfo.book_id}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert(`Book Rented! \"${bookInfo.title}\" is yours to borrow.`);
-      navigate("/");
+      navigate("/studenthome");
     }).catch(error => { alert(error.response.data.detail); })
   }
 

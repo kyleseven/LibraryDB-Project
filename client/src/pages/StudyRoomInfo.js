@@ -30,7 +30,7 @@ function StudyRoomInfo() {
     axios.post(`http://localhost:8000/rent/studyroom/${studyRoomInfo.room_no}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert(`You've rented Study Room #${studyRoomInfo.room_no}`);
-      navigate("/");
+      navigate("/studenthome");
     }).catch(error => { alert(error.response.data.detail); })
   }
 

@@ -30,7 +30,7 @@ function DeviceInfo() {
     axios.post(`http://localhost:8000/rent/device/${deviceInfo.device_id}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert(`You've rented Device ID #${deviceInfo.device_id}`);
-      navigate("/");
+      navigate("/studenthome");
     }).catch(error => { alert(error.response.data.detail); })
   }
 

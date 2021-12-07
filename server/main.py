@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from jose import JWTError, jwt
-from models import Book
+from models import Book, Device
 import utils
 import mysql.connector
 import json
@@ -385,6 +385,22 @@ async def return_device_by_id(device_id: int, current_user: User = Depends(get_c
     conn.commit()
 
     return device_id
+
+
+@app.post("/add/device")
+async def add_device(device: Device, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.LIBRARIAN:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    query = f"INSERT INTO DEVICE (type) VALUES ('{device.type}')"
+
+    try:
+        cur.execute(query)
+        conn.commit()
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=400, detail=f"Database Error: {err}")
+
+    return
 
 
 @app.get("/user/me/username")

@@ -42,7 +42,7 @@ function LibrarianHome() {
       <h3>LIBRARIAN</h3>
       <Link to="/addbook"><Button style={{ padding: "5px" }}>Add Books</Button></Link>
       <Button style={{ padding: "5px" }} onClick={addStudyRoom}>Add Study Room</Button>
-      <Link to="/rentdevices"><Button style={{ padding: "5px" }}>Add Device</Button></Link>
+      <Link to="/adddevice"><Button style={{ padding: "5px" }}>Add Device</Button></Link>
       <Link to="/"><Button style={{ padding: "5px" }} color="danger">Log Out</Button></Link>
     </div>
   );

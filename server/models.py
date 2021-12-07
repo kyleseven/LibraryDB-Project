@@ -13,3 +13,9 @@ class Book(BaseModel):
     language_written_in: str
     ISBN_13: str
     is_rented: bool = False
+
+
+class Device(BaseModel):
+    device_id: Optional[int]
+    type: str
+    is_rented: bool = False

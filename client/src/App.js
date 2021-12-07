@@ -15,6 +15,7 @@ import StudyRoomInfo from './pages/StudyRoomInfo';
 import DeviceInfo from './pages/DeviceInfo';
 import ReturnItems from './pages/ReturnItems';
 import LibrarianHome from './pages/LibrarianHome';
+import AddBook from './pages/AddBook';
 
 function App() {
   const [homeLink, setHomeLink] = useState("/");
@@ -50,6 +51,7 @@ function App() {
           <Route path="/device/:device_id" element={<DeviceInfo />} />
           {/* Librarian Routes */}
           <Route path="/librarianhome" element={<LibrarianHome />} />
+          <Route path="/addbook" element={<AddBook />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -32,7 +32,7 @@ function LibrarianHome() {
       <div style={{ paddingBottom: "10px" }} />
       <h1>Hello {username}.</h1>
       <h3>LIBRARIAN</h3>
-      <Link to="/rentbooks"><Button style={{ padding: "5px" }}>Add Books</Button></Link>
+      <Link to="/addbook"><Button style={{ padding: "5px" }}>Add Books</Button></Link>
       <Link to="/rentstudyrooms"><Button style={{ padding: "5px" }}>Add Study Room</Button></Link>
       <Link to="/rentdevices"><Button style={{ padding: "5px" }}>Add Device</Button></Link>
       <Link to="/"><Button style={{ padding: "5px" }} color="danger">Log Out</Button></Link>

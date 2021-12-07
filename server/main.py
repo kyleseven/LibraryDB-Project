@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from jose import JWTError, jwt
+from models import Book
 import utils
 import mysql.connector
 import json
@@ -243,6 +244,25 @@ async def return_book_by_id(book_id: int, current_user: User = Depends(get_curre
     conn.commit()
 
     return book_id
+
+
+@app.post("/add/book/")
+async def add_book(book: Book, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.LIBRARIAN:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    query = "INSERT INTO BOOK " \
+            "(title, author, physical_location, publisher, subject, publication_date, language_written_in, ISBN_13) " \
+            "VALUES " \
+            f"('{book.title}', '{book.author}', '{book.physical_location}', '{book.publisher}', '{book.subject}', '{book.publication_date}', '{book.language_written_in}', {book.ISBN_13})"
+
+    try:
+        cur.execute(query)
+        conn.commit()
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=400, detail=f"Database Error: {err}")
+
+    return book
 
 
 ###############

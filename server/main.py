@@ -227,6 +227,24 @@ async def rent_book_by_id(book_id: int, current_user: User = Depends(get_current
     return book_id
 
 
+@app.post("/return/book/{book_id}")
+async def return_book_by_id(book_id: int, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.STUDENT:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    cur.execute(f"SELECT rented_book from STUDENT WHERE account_id={current_user.account_id}")
+    rented_book_id = utils.dict_to_json(cur)[0]["rented_book"]
+
+    if book_id != rented_book_id:
+        raise HTTPException(status_code=400, detail="You can't return a book that you haven't rented.")
+
+    cur.execute(f"UPDATE BOOK SET is_rented=false WHERE book_id={book_id}")
+    cur.execute(f"UPDATE STUDENT SET rented_book=0 WHERE account_id={current_user.account_id}")
+    conn.commit()
+
+    return book_id
+
+
 ###############
 # STUDY ROOMS #
 ###############
@@ -262,6 +280,24 @@ async def rent_study_room_by_room_no(room_no: int, current_user: User = Depends(
     return
 
 
+@app.post("/return/study_room/{room_no}")
+async def return_study_room_by_room_no(room_no: int, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.STUDENT:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    cur.execute(f"SELECT rented_study_room from STUDENT WHERE account_id={current_user.account_id}")
+    rented_study_room_no = utils.dict_to_json(cur)[0]["rented_study_room"]
+
+    if room_no != rented_study_room_no:
+        raise HTTPException(status_code=400, detail="You can't return a study room that you haven't rented.")
+
+    cur.execute(f"UPDATE STUDY_ROOM SET is_rented=false WHERE room_no={room_no}")
+    cur.execute(f"UPDATE STUDENT SET rented_study_room=0 WHERE account_id={current_user.account_id}")
+    conn.commit()
+
+    return room_no
+
+
 ###########
 # DEVICES #
 ###########
@@ -295,6 +331,24 @@ async def rent_device_by_id(device_id: int, current_user: User = Depends(get_cur
     cur.execute(f"UPDATE STUDENT SET rented_device={device_id} WHERE account_id={current_user.account_id}")
     conn.commit()
     return
+
+
+@app.post("/return/device/{device_id}")
+async def return_device_by_id(device_id: int, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.STUDENT:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    cur.execute(f"SELECT rented_device from STUDENT WHERE account_id={current_user.account_id}")
+    rented_device_id = utils.dict_to_json(cur)[0]["rented_device"]
+
+    if device_id != rented_device_id:
+        raise HTTPException(status_code=400, detail="You can't return a device that you haven't rented.")
+
+    cur.execute(f"UPDATE DEVICE SET is_rented=false WHERE device_id={device_id}")
+    cur.execute(f"UPDATE STUDENT SET rented_device=0 WHERE account_id={current_user.account_id}")
+    conn.commit()
+
+    return device_id
 
 
 @app.get("/user/me/username")

@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from jose import JWTError, jwt
-from models import Book, Device, Student, StudyRoom
+from models import Book, Device, Student, StudentAccount, StudyRoom
 import utils
 import mysql.connector
 
@@ -457,6 +457,23 @@ async def delete_device(device: Device, current_user: User = Depends(get_current
 #######################
 #    User Data API    #
 #######################
+@app.post("/user/register")
+async def register_student(account: StudentAccount):
+    try:
+        cur.execute(f"INSERT INTO ACCOUNT (username, password) VALUES (\'{account.username}\', \'{account.password}\')")
+        conn.commit()
+        cur.execute(f"SELECT account_id FROM ACCOUNT WHERE username=\'{account.username}\'")
+        account_id = utils.dict_to_json(cur)[0]["account_id"]
+
+        cur.execute(f"INSERT INTO STUDENT_ACCOUNT (account_id) VALUES ({account_id})")
+        cur.execute(f"INSERT INTO STUDENT (name, address, account_id) VALUES (\'{account.name}\', \'{account.address}\', {account_id})")
+        conn.commit()
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=400, detail=f"Database Error {err}")
+
+    return account
+
+
 @app.get("/user/me/username")
 async def get_username(current_user: User = Depends(get_current_user)):
     return {

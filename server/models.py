@@ -28,3 +28,10 @@ class Device(BaseModel):
 class Student(BaseModel):
     name: str
     address: str
+
+
+class StudentAccount(BaseModel):
+    name: str
+    address: str
+    username: str
+    password: str

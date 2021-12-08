@@ -19,6 +19,7 @@ import AddBook from './pages/AddBook';
 import AddDevice from './pages/AddDevice';
 import StudentInfo from './pages/StudentInfo';
 import UpdateStudentInfo from './pages/UpdateStudentInfo';
+import RegisterStudent from './pages/RegisterStudent';
 
 function App() {
   const [homeLink, setHomeLink] = useState("/");
@@ -44,6 +45,7 @@ function App() {
         {/* When adding a new page, add a Route */}
         <Routes>
           <Route path="/" element={<Login setHomeLink={setHomeLink} setShowDeleteButtons={setShowDeleteButtons}/>} />
+          <Route path="/registerstudent" element={<RegisterStudent />} />
           {/* Student Routes */}
           <Route path="/studenthome" element={<StudentHome />} />
           <Route path="/studentinfo" element={<StudentInfo />} />

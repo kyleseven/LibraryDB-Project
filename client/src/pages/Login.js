@@ -3,7 +3,7 @@ import 'emerald-ui/lib/styles.css';
 import axios from 'axios';
 import TextField from 'emerald-ui/lib/TextField';
 import Button from 'emerald-ui/lib/Button';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import qs from 'query-string';
 
@@ -75,7 +75,8 @@ function Login({ setHomeLink, setShowDeleteButtons }) {
             )
           }
         />
-        <Button type="submit" color="info">Log In</Button>
+        <Button style={{ padding: "5px" }}type="submit" color="info">Log In</Button>
+        <Link to="/registerstudent"><Button style={{ padding: "5px" }}>Register Student</Button></Link>
       </form>
     </div>
   )

@@ -43,10 +43,9 @@ function ReturnItemsDisplay() {
       axios.post(`/return/book/${rentedItems.rented_book}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
         .then(() => {
           rentedItems.rented_book = 0;
+          alert(`You have returned ${bookTitle}!`);
         }).catch(error => { alert(error.response.data.detail); })
     }
-
-    alert(`You have returned ${bookTitle}!`);
   }
 
   const returnStudyRoom = () => {
@@ -60,10 +59,9 @@ function ReturnItemsDisplay() {
       axios.post(`/return/study_room/${rentedItems.rented_study_room}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
         .then(() => {
           rentedItems.rented_study_room = 0;
+          alert(`You have returned Study Room ${rentedItems.rented_study_room}!`);
         }).catch(error => { alert(error); })
     }
-
-    alert(`You have returned Study Room ${rentedItems.rented_study_room}!`);
   }
 
   const returnDevice = () => {
@@ -75,13 +73,11 @@ function ReturnItemsDisplay() {
     let userChoice = window.confirm(`Are you sure you want to return Device ID#${rentedItems.rented_device}?`);
     if (userChoice) {
       axios.post(`/return/device/${rentedItems.rented_device}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
-        .then(() => {
-          
+        .then(() => {  
           rentedItems.rented_device = 0;
+          alert(`You have returned Device ID#${rentedItems.rented_device}!`);
         }).catch(error => { alert(error); })
     }
-
-    alert(`You have returned Device ID#${rentedItems.rented_device}!`);
   }
 
   return (

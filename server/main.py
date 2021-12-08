@@ -399,6 +399,9 @@ async def add_device(device: Device, current_user: User = Depends(get_current_us
     return
 
 
+#######################
+#    User Data API    #
+#######################
 @app.get("/user/me/username")
 async def get_username(current_user: User = Depends(get_current_user)):
     return {
@@ -433,6 +436,7 @@ async def get_student_info(current_user: User = Depends(get_current_user)):
     data = utils.dict_to_json(cur)
 
     return data[0]
+
 
 @app.post("/user/student/info/update")
 async def update_student_info(student: Student, current_user: User = Depends(get_current_user)):

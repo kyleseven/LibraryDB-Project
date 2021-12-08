@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../App.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css';
 import SearchForm from 'emerald-ui/lib/SearchForm';
 import BookDisplay from '../components/BookDisplay';

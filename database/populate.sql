@@ -17,13 +17,13 @@ VALUES (
 );
 
 /*
-+------------+----------+----------+
-| account_id | username | password |
-+------------+----------+----------+
-|          1 | user1    | test     |  <- Employee (Librarian)
-|          2 | user2    | test     |  <- Employee (Bursar)
-|          3 | user3    | test     |  <- Student
-+------------+----------+----------+
++------------+------------+----------+
+| account_id | username   | password |
++------------+------------+----------+
+|          1 | librarian1 | password | <- Librarian
+|          2 | student1   | password | <- Student 1
+|          3 | student2   | password | <- Student 2
++------------+------------+----------+
 
 Creating an Employee: ACCOUNT -> EMPLOYEE_ACCOUNT -> EMPLOYEE -> LIBRARIAN/BURSAR (if applicable)
 Creating a Student: ACCOUNT -> STUDENT_ACCOUNT -> STUDENT

@@ -6,7 +6,7 @@ import 'emerald-ui/lib/styles.css';
 import Button from 'emerald-ui/lib/Button';
 import Icon from 'emerald-ui/lib/Icon'
 
-function StudyRoomInfo() {
+function StudyRoomInfo({ showDeleteButtons }) {
   const { room_no } = useParams();
   const navigate = useNavigate();
   const [studyRoomInfo, setStudyRoomInfo] = useState();
@@ -33,6 +33,15 @@ function StudyRoomInfo() {
     }).catch(error => { alert(error.response.data.detail); })
   }
 
+  const deleteStudyRoom = () => {
+    axios.post(`/delete/study_room`, studyRoomInfo, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    .then(() => {
+      alert("Study Room deleted!");
+      navigate("/librarianhome");
+    })
+    .catch(error => { alert(error.response.data.detail) });
+  }
+
   return (
     <div style={{ padding: "40px" }}>
       <Link to="/rentstudyrooms">
@@ -42,7 +51,10 @@ function StudyRoomInfo() {
         </Button>
       </Link>
       <h1>Study Room #{studyRoomInfo.room_no}</h1>
-      <Button color="info" onClick={rentStudyRoom}>Rent Study Room</Button>
+      {showDeleteButtons
+          ? <Button color="danger" onClick={deleteStudyRoom}>Delete Study Room</Button>
+          : <Button color="info" onClick={rentStudyRoom}>Rent Study Room</Button>
+      }
     </div>
   );
 }

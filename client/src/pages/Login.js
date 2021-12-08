@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import qs from 'query-string';
 
-function Login({ setHomeLink }) {
+function Login({ setHomeLink, setShowDeleteButtons }) {
   const { control, handleSubmit } = useForm();
   const navigate = useNavigate();
 
@@ -25,10 +25,12 @@ function Login({ setHomeLink }) {
           if (res.data.account_type === "AccountType.STUDENT") {
             homeLink = "/studenthome";
             setHomeLink(homeLink);
+            setShowDeleteButtons(false);
           }
           else if (res.data.account_type === "AccountType.LIBRARIAN") {
             homeLink = "/librarianhome";
             setHomeLink(homeLink);
+            setShowDeleteButtons(true);
           }
           else {
             alert("Invalid account type.")

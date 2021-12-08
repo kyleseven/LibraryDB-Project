@@ -6,7 +6,7 @@ import 'emerald-ui/lib/styles.css';
 import Button from 'emerald-ui/lib/Button';
 import Icon from 'emerald-ui/lib/Icon'
 
-function BookInfo() {
+function BookInfo({ showDeleteButtons }) {
   const { book_id } = useParams();
   const navigate = useNavigate();
   const [bookInfo, setBookInfo] = useState();
@@ -14,10 +14,10 @@ function BookInfo() {
 
   useEffect(() => {
     axios.get(`/book/${book_id}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
-    .then(res => {
-      setBookInfo(res.data);
-      setLoading(false);
-    });
+      .then(res => {
+        setBookInfo(res.data);
+        setLoading(false);
+      });
     document.title = "Book Info"
   }, [book_id])
 
@@ -27,10 +27,19 @@ function BookInfo() {
 
   const rentBook = () => {
     axios.post(`/rent/book/${bookInfo.book_id}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+      .then(() => {
+        alert(`Book Rented! "${bookInfo.title}" is yours to borrow.`);
+        navigate("/studenthome");
+      }).catch(error => { alert(error.response.data.detail); })
+  }
+
+  const deleteBook = () => {
+    axios.post(`/delete/book`, bookInfo, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
-      alert(`Book Rented! "${bookInfo.title}" is yours to borrow.`);
-      navigate("/studenthome");
-    }).catch(error => { alert(error.response.data.detail); })
+      alert("Book deleted!");
+      navigate("/librarianhome");
+    })
+    .catch(error => { alert(error.response.data.detail) });
   }
 
   return (
@@ -51,7 +60,10 @@ function BookInfo() {
         <b>Physical Location:</b> <tt>{bookInfo.physical_location}</tt><br />
         <b>ISBN-13:</b> <tt>{bookInfo.ISBN_13}</tt><br />
       </p>
-      <Button color="info" onClick={rentBook}>Rent Book</Button>
+      {showDeleteButtons
+          ? <Button color="danger" onClick={deleteBook}>Delete Book</Button>
+          : <Button color="info" onClick={rentBook}>Rent Book</Button>
+      }
     </div>
   );
 }

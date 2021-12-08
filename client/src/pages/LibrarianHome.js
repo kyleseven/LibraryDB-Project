@@ -43,6 +43,9 @@ function LibrarianHome() {
       <Link to="/addbook"><Button style={{ padding: "5px" }}>Add Books</Button></Link>
       <Button style={{ padding: "5px" }} onClick={addStudyRoom}>Add Study Room</Button>
       <Link to="/adddevice"><Button style={{ padding: "5px" }}>Add Device</Button></Link>
+      <Link to="/rentbooks"><Button style={{ padding: "5px" }} color="warning">Delete Books</Button></Link>
+      <Link to="/rentstudyrooms"><Button style={{ padding: "5px" }} color="warning">Delete Study Rooms</Button></Link>
+      <Link to="/rentdevices"><Button style={{ padding: "5px" }} color="warning">Delete Devices</Button></Link>
       <Link to="/"><Button style={{ padding: "5px" }} color="danger">Log Out</Button></Link>
     </div>
   );

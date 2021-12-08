@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from jose import JWTError, jwt
-from models import Book, Device, Student
+from models import Book, Device, Student, StudyRoom
 import utils
 import mysql.connector
 import json
@@ -261,6 +261,25 @@ async def add_book(book: Book, current_user: User = Depends(get_current_user)):
     return book
 
 
+@app.post("/delete/book")
+async def delete_book(book: Book, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.LIBRARIAN:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    cur.execute(f"SELECT is_rented FROM BOOK WHERE book_id={book.book_id}")
+    data = utils.dict_to_json(cur)
+    if data[0]["is_rented"] != 0:
+        raise HTTPException(status_code=400, detail="You cannot delete this book because it's currently being rented.")
+
+    try:
+        cur.execute(f"DELETE FROM BOOK WHERE book_id={book.book_id}")
+        conn.commit()
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=400, detail=f"Database Error: {err}")
+
+    return book
+
+
 ###############
 # STUDY ROOMS #
 ###############
@@ -330,6 +349,25 @@ async def add_study_room(current_user: User = Depends(get_current_user)):
     return
 
 
+@app.post("/delete/study_room")
+async def delete_study_room(study_room: StudyRoom, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.LIBRARIAN:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    cur.execute(f"SELECT is_rented FROM STUDY_ROOM WHERE room_no={study_room.room_no}")
+    data = utils.dict_to_json(cur)
+    if data[0]["is_rented"] != 0:
+        raise HTTPException(status_code=400, detail="You cannot delete this study room because it's currently being rented.")
+
+    try:
+        cur.execute(f"DELETE FROM STUDY_ROOM WHERE room_no={study_room.room_no}")
+        conn.commit()
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=400, detail=f"Database Error: {err}")
+
+    return study_room
+
+
 ###########
 # DEVICES #
 ###########
@@ -397,6 +435,25 @@ async def add_device(device: Device, current_user: User = Depends(get_current_us
         raise HTTPException(status_code=400, detail=f"Database Error: {err}")
 
     return
+
+
+@app.post("/delete/device")
+async def delete_device(device: Device, current_user: User = Depends(get_current_user)):
+    if get_user_account_type(current_user) != AccountType.LIBRARIAN:
+        raise HTTPException(status_code=401, detail="Your account type cannot access this.")
+
+    cur.execute(f"SELECT is_rented FROM DEVICE WHERE device_id={device.device_id}")
+    data = utils.dict_to_json(cur)
+    if data[0]["is_rented"] != 0:
+        raise HTTPException(status_code=400, detail="You cannot delete this device because it's currently being rented.")
+
+    try:
+        cur.execute(f"DELETE FROM DEVICE WHERE device_id={device.device_id}")
+        conn.commit()
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=400, detail=f"Database Error: {err}")
+
+    return device
 
 
 #######################

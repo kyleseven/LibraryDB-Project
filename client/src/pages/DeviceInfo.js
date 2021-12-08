@@ -6,7 +6,7 @@ import 'emerald-ui/lib/styles.css';
 import Button from 'emerald-ui/lib/Button';
 import Icon from 'emerald-ui/lib/Icon'
 
-function DeviceInfo() {
+function DeviceInfo({ showDeleteButtons }) {
   const { device_id } = useParams();
   const navigate = useNavigate();
   const [deviceInfo, setDeviceInfo] = useState();
@@ -33,6 +33,15 @@ function DeviceInfo() {
     }).catch(error => { alert(error.response.data.detail); })
   }
 
+  const deleteDevice = () => {
+    axios.post(`/delete/device`, deviceInfo, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    .then(() => {
+      alert("Device deleted!");
+      navigate("/librarianhome");
+    })
+    .catch(error => { alert(error.response.data.detail) });
+  }
+
   return (
     <div style={{ padding: "40px" }}>
       <Link to="/rentdevices">
@@ -45,7 +54,10 @@ function DeviceInfo() {
       <p>
         <b>Type:</b> {deviceInfo.type}<br />
       </p>
-      <Button color="info" onClick={rentDevice}>Rent Device</Button>
+      {showDeleteButtons
+          ? <Button color="danger" onClick={deleteDevice}>Delete Device</Button>
+          : <Button color="info" onClick={rentDevice}>Rent Device</Button>
+      }
     </div>
   );
 }

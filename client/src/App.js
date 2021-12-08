@@ -22,6 +22,7 @@ import UpdateStudentInfo from './pages/UpdateStudentInfo';
 
 function App() {
   const [homeLink, setHomeLink] = useState("/");
+  const [showDeleteButtons, setShowDeleteButtons] = useState(false);
 
 
   useEffect(() => {
@@ -42,7 +43,7 @@ function App() {
         </Navbar>
         {/* When adding a new page, add a Route */}
         <Routes>
-          <Route path="/" element={<Login setHomeLink={setHomeLink}/>} />
+          <Route path="/" element={<Login setHomeLink={setHomeLink} setShowDeleteButtons={setShowDeleteButtons}/>} />
           {/* Student Routes */}
           <Route path="/studenthome" element={<StudentHome />} />
           <Route path="/studentinfo" element={<StudentInfo />} />
@@ -51,9 +52,9 @@ function App() {
           <Route path="/rentstudyrooms" element={<RentStudyRooms />} />
           <Route path="/rentdevices" element={<RentDevices />} />
           <Route path="/returnitems" element={<ReturnItems />} />
-          <Route path="/book/:book_id" element={<BookInfo />} />
-          <Route path="/studyroom/:room_no" element={<StudyRoomInfo />} />
-          <Route path="/device/:device_id" element={<DeviceInfo />} />
+          <Route path="/book/:book_id" element={<BookInfo showDeleteButtons={showDeleteButtons}/>} />
+          <Route path="/studyroom/:room_no" element={<StudyRoomInfo showDeleteButtons={showDeleteButtons}/>} />
+          <Route path="/device/:device_id" element={<DeviceInfo showDeleteButtons={showDeleteButtons}/>} />
           {/* Librarian Routes */}
           <Route path="/librarianhome" element={<LibrarianHome />} />
           <Route path="/addbook" element={<AddBook />} />

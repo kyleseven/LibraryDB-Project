@@ -15,6 +15,10 @@ class Book(BaseModel):
     is_rented: bool = False
 
 
+class StudyRoom(BaseModel):
+    room_no: int
+
+
 class Device(BaseModel):
     device_id: Optional[int]
     type: str

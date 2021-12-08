@@ -32,7 +32,6 @@ function RentBooks() {
     <div className="App">
       <SearchForm inputId="bookSearch" placeholder="Search for a Book" onSubmit={onSubmit} onChange={onChange} clearable></SearchForm>
       <BookDisplay />
-      <Link to="/">Back to Home</Link>
     </div>
   );
 }

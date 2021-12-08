@@ -24,7 +24,7 @@ function StudentInfo() {
 
   return (
     <div style={{ padding: "40px" }}>
-      <h1>{studentInfo.title}</h1>
+      <h1>Student Info</h1>
       <p>
         <b>Name:</b> {studentInfo.name}<br />
         <b>Address:</b> {studentInfo.address}<br />

@@ -57,8 +57,8 @@ function ReturnItemsDisplay() {
           }
         )
         .then(() => {
-          rentedItems.rented_book = 0;
           alert(`You have returned ${bookTitle}!`);
+          rentedItems.rented_book = 0;
         })
         .catch((error) => {
           alert(error.response.data.detail);
@@ -87,10 +87,10 @@ function ReturnItemsDisplay() {
           }
         )
         .then(() => {
-          rentedItems.rented_study_room = 0;
           alert(
             `You have returned Study Room ${rentedItems.rented_study_room}!`
           );
+          rentedItems.rented_study_room = 0;
         })
         .catch((error) => {
           alert(error);
@@ -119,8 +119,8 @@ function ReturnItemsDisplay() {
           }
         )
         .then(() => {
-          rentedItems.rented_device = 0;
           alert(`You have returned Device ID#${rentedItems.rented_device}!`);
+          rentedItems.rented_device = 0;
         })
         .catch((error) => {
           alert(error);

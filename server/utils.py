@@ -1,7 +1,3 @@
-from ssl import ALERT_DESCRIPTION_ACCESS_DENIED
-import mysql.connector
-
-
 def dict_to_json(cursor):
     desc = cursor.description
     column_names = [col[0] for col in desc]

@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from enum import Enum
 from typing import Optional
-from wsgiref import headers
 from fastapi import FastAPI, HTTPException, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -10,7 +9,6 @@ from jose import JWTError, jwt
 from models import Book, Device, Student, StudyRoom
 import utils
 import mysql.connector
-import json
 
 # MySQL Stuff
 conn = mysql.connector.connect(

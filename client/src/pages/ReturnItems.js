@@ -1,11 +1,10 @@
 import "../App.css";
-import { useEffect } from 'react';
 import ReturnItemsDisplay from "../components/ReturnItemsDisplay";
-
+import { useEffect } from "react";
 
 function ReturnItems() {
   useEffect(() => {
-    document.title = "Return Items"
+    document.title = "Return Items";
   }, []);
 
   return (

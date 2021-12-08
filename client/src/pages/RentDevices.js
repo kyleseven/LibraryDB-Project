@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import '../App.css'
-import 'emerald-ui/lib/styles.css'
-import DeviceDisplay from '../components/DeviceDisplay';
+import "../App.css";
+import DeviceDisplay from "../components/DeviceDisplay";
+import "emerald-ui/lib/styles.css";
+import { useEffect } from "react";
 
 function RentDevices() {
   useEffect(() => {
-    document.title = "Rent Devices"
+    document.title = "Rent Devices";
   }, []);
 
   return (

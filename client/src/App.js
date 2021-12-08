@@ -47,7 +47,7 @@ function App() {
           <Route path="/" element={<Login setHomeLink={setHomeLink} setShowDeleteButtons={setShowDeleteButtons}/>} />
           <Route path="/registerstudent" element={<RegisterStudent />} />
           {/* Student Routes */}
-          <Route path="/studenthome" element={<StudentHome />} />
+          <Route path="/studenthome" element={<StudentHome setHomeLink={setHomeLink}/>} />
           <Route path="/studentinfo" element={<StudentInfo />} />
           <Route path="/studentinfo/update" element={<UpdateStudentInfo />} />
           <Route path="/rentbooks" element={<RentBooks />} />
@@ -58,7 +58,7 @@ function App() {
           <Route path="/studyroom/:room_no" element={<StudyRoomInfo showDeleteButtons={showDeleteButtons}/>} />
           <Route path="/device/:device_id" element={<DeviceInfo showDeleteButtons={showDeleteButtons}/>} />
           {/* Librarian Routes */}
-          <Route path="/librarianhome" element={<LibrarianHome />} />
+          <Route path="/librarianhome" element={<LibrarianHome setHomeLink={setHomeLink}/>} />
           <Route path="/addbook" element={<AddBook />} />
           <Route path="/adddevice" element={<AddDevice />} />
         </Routes>

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import '../App.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'emerald-ui/lib/styles.css'
 import Button from 'emerald-ui/lib/Button';
 import axios from 'axios';
 
-function LibrarianHome() {
+function LibrarianHome({ setHomeLink }) {
   const [username, setUsername] = useState();
   const [isLoading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Librarian Home"
@@ -35,6 +36,12 @@ function LibrarianHome() {
     .catch(error => { alert(error.repsonse.data.detail); })
   }
 
+  const logoutUser = () => {
+    sessionStorage.setItem("token", "");
+    setHomeLink("/")
+    navigate("/");
+  }
+
   return (
     <div className="App">
       <div style={{ paddingBottom: "10px" }} />
@@ -46,7 +53,7 @@ function LibrarianHome() {
       <Link to="/rentbooks"><Button style={{ padding: "5px" }} color="warning">Delete Books</Button></Link>
       <Link to="/rentstudyrooms"><Button style={{ padding: "5px" }} color="warning">Delete Study Rooms</Button></Link>
       <Link to="/rentdevices"><Button style={{ padding: "5px" }} color="warning">Delete Devices</Button></Link>
-      <Link to="/"><Button style={{ padding: "5px" }} color="danger">Log Out</Button></Link>
+      <Button style={{ padding: "5px" }} color="danger" onClick={logoutUser}>Log Out</Button>
     </div>
   );
 }

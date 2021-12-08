@@ -5,11 +5,16 @@ import TextField from 'emerald-ui/lib/TextField';
 import Button from 'emerald-ui/lib/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
+import { useEffect } from 'react';
 import qs from 'query-string';
 
 function Login({ setHomeLink, setShowDeleteButtons }) {
   const { control, handleSubmit } = useForm();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
 
   const onSubmit = (data) => {
     data = {

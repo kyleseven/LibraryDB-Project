@@ -1,12 +1,17 @@
 import axios from "axios";
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import TextField from 'emerald-ui/lib/TextField';
 import Button from 'emerald-ui/lib/Button';
 
 function AddBook() {
   const { control, handleSubmit } = useForm();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Add Book";
+  }, []);
 
   const onSubmit = (data) => {
     axios.post("/add/book/", data, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })

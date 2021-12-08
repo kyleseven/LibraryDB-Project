@@ -13,7 +13,7 @@ function BookInfo() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/book/${book_id}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get(`/book/${book_id}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(res => {
       setBookInfo(res.data);
       setLoading(false);
@@ -26,7 +26,7 @@ function BookInfo() {
   }
 
   const rentBook = () => {
-    axios.post(`http://localhost:8000/rent/book/${bookInfo.book_id}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.post(`/rent/book/${bookInfo.book_id}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert(`Book Rented! "${bookInfo.title}" is yours to borrow.`);
       navigate("/studenthome");

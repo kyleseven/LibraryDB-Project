@@ -13,7 +13,7 @@ function StudyRoomInfo() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/studyroom/${room_no}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get(`/studyroom/${room_no}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(res => {
       setStudyRoomInfo(res.data);
       setLoading(false);
@@ -26,7 +26,7 @@ function StudyRoomInfo() {
   }
 
   const rentStudyRoom = () => {
-    axios.post(`http://localhost:8000/rent/studyroom/${studyRoomInfo.room_no}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.post(`/rent/studyroom/${studyRoomInfo.room_no}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert(`You've rented Study Room #${studyRoomInfo.room_no}`);
       navigate("/studenthome");

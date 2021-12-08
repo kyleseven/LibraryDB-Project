@@ -12,7 +12,7 @@ function UpdateStudentInfo() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/user/student/info`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get(`/user/student/info`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(res => {
       setStudentInfo(res.data);
       setLoading(false);
@@ -22,7 +22,7 @@ function UpdateStudentInfo() {
 
   const onSubmit = (data) => {
     console.log(data)
-    axios.post("http://localhost:8000/user/student/info/update", data, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.post("/user/student/info/update", data, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert("Info updated!");
       navigate("/studentinfo");

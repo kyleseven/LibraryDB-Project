@@ -11,7 +11,7 @@ function LibrarianHome() {
 
   useEffect(() => {
     document.title = "Librarian Home"
-    axios.get("http://localhost:8000/user/me/username", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get("/user/me/username", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
       .then(res => {
         setUsername(res.data.username);
         setLoading(false);
@@ -28,7 +28,7 @@ function LibrarianHome() {
   }
 
   const addStudyRoom = () => {
-    axios.post("http://localhost:8000/add/study_room", {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.post("/add/study_room", {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert("Added a new Study Room!");
     })

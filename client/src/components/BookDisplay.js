@@ -12,7 +12,7 @@ class BookDisplay extends React.Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:8000/books", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get("/books", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(res => {
       this.setState({ books: res.data })
     });

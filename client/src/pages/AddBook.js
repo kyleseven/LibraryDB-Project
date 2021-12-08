@@ -9,7 +9,7 @@ function AddBook() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:8000/add/book/", data, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.post("/add/book/", data, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert("Book added!");
       navigate("/librarianhome");

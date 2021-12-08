@@ -16,7 +16,7 @@ function RentBooks() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    axios.get(`http://localhost:8000/book/title/${searchQuery}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get(`/book/title/${searchQuery}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
       .then(res => {
           navigate(`/book/${res.data.book_id}`);
         }

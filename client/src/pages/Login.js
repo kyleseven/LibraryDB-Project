@@ -17,10 +17,10 @@ function Login({ setHomeLink }) {
       username: data.username,
       password: data.password
     }
-    axios.post("http://localhost:8000/token", qs.stringify(data)).then(res => {
+    axios.post("/token", qs.stringify(data)).then(res => {
       sessionStorage.setItem("token", res.data.access_token);
       let homeLink = "";
-      axios.get("http://localhost:8000/user/me/account_type", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+      axios.get("/user/me/account_type", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
         .then(res => {
           if (res.data.account_type === "AccountType.STUDENT") {
             homeLink = "/studenthome";

@@ -13,7 +13,7 @@ function DeviceInfo() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/device/${device_id}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get(`/device/${device_id}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(res => {
       setDeviceInfo(res.data);
       setLoading(false);
@@ -26,7 +26,7 @@ function DeviceInfo() {
   }
 
   const rentDevice = () => {
-    axios.post(`http://localhost:8000/rent/device/${deviceInfo.device_id}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.post(`/rent/device/${deviceInfo.device_id}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert(`You've rented Device ID #${deviceInfo.device_id}`);
       navigate("/studenthome");

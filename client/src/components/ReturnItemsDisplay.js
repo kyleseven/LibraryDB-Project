@@ -9,11 +9,11 @@ function ReturnItemsDisplay() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/user/me/items", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get("/user/me/items", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
       .then(res => {
         setRentedItems(res.data);
         if (res.data.rented_book !== 0) {
-          axios.get(`http://localhost:8000/book/${res.data.rented_book}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+          axios.get(`/book/${res.data.rented_book}`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
             .then(
               res => {
                 setBookTitle(res.data.title);
@@ -40,7 +40,7 @@ function ReturnItemsDisplay() {
 
     let userChoice = window.confirm(`Are you sure you want to return ${bookTitle}?`);
     if (userChoice) {
-      axios.post(`http://localhost:8000/return/book/${rentedItems.rented_book}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+      axios.post(`/return/book/${rentedItems.rented_book}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
         .then(() => {
           rentedItems.rented_book = 0;
         }).catch(error => { alert(error.response.data.detail); })
@@ -57,7 +57,7 @@ function ReturnItemsDisplay() {
 
     let userChoice = window.confirm(`Are you sure you want to return Study Room ${rentedItems.rented_study_room}?`);
     if (userChoice) {
-      axios.post(`http://localhost:8000/return/study_room/${rentedItems.rented_study_room}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+      axios.post(`/return/study_room/${rentedItems.rented_study_room}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
         .then(() => {
           rentedItems.rented_study_room = 0;
         }).catch(error => { alert(error); })
@@ -74,7 +74,7 @@ function ReturnItemsDisplay() {
 
     let userChoice = window.confirm(`Are you sure you want to return Device ID#${rentedItems.rented_device}?`);
     if (userChoice) {
-      axios.post(`http://localhost:8000/return/device/${rentedItems.rented_device}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+      axios.post(`/return/device/${rentedItems.rented_device}`, {}, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
         .then(() => {
           
           rentedItems.rented_device = 0;

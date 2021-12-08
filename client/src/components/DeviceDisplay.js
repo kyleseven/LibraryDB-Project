@@ -10,7 +10,7 @@ function DeviceDisplay() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/devices", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get("/devices", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
       .then(res => {
         setDevices(res.data);
         setLoading(false);

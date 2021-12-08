@@ -11,7 +11,7 @@ function StudentHome() {
 
   useEffect(() => {
     document.title = "Student Home"
-    axios.get("http://localhost:8000/user/me/username", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get("/user/me/username", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
       .then(res => {
         setUsername(res.data.username);
         setLoading(false);

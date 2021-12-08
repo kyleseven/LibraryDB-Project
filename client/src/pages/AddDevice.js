@@ -9,7 +9,7 @@ function AddDevice() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:8000/add/device", data, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.post("/add/device", data, { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
     .then(() => {
       alert("Device added!");
       navigate("/librarianhome");

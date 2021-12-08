@@ -10,7 +10,7 @@ function StudyRoomDisplay() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/studyrooms", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
+    axios.get("/studyrooms", { headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } })
       .then(res => {
         setStudyRooms(res.data);
         setLoading(false);

@@ -17,9 +17,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 MariaDB [(none)]>
 ```
 4. Create the user that's used by the back end.
-    - `CREATE USER 'test'@'localhost' IDENTIFIED BY 'test';`
-    - `GRANT ALL PRIVILEGES ON *.* TO 'test'@'localhost';`
-    - `FLUSH PRIVILEGES;`
+    - `source /path/to/LibraryDB-Project/database/user.sql`
 
 5. Construct and Populate our LIBRARY database
     - `source /path/to/LibraryDB-Project/database/construction.sql`

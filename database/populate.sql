@@ -1,3 +1,5 @@
+USE LIBRARY;
+
 INSERT INTO ACCOUNT (username, password)
 VALUES (
     'librarian1',

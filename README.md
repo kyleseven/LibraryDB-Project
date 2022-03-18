@@ -15,6 +15,11 @@ This is the easiest way to set up and run all components of the application. You
     - `docker-compose up --build`
 
 3. Open the UI by visiting `localhost:3000` in a browser.
+    - Log in using any of the following usernames. The password is `password` for all of these accounts.
+        - librarian1
+        - student1
+        - student2
+    - You can also create more student accounts with the "Register Student" button.
 
 4. Stop all containers by doing either:
     - Ctrl+C in the same terminal you ran step 2.

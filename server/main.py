@@ -7,17 +7,28 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from jose import JWTError, jwt
 from models import Book, Device, Student, StudentAccount, StudyRoom
+import os
 import utils
 import mysql.connector
 
 # MySQL Stuff
-conn = mysql.connector.connect(
-    user="test",
-    password="test",
-    host="127.0.0.1",
-    port=3306,
-    database="LIBRARY"
-)
+while True:
+    try:
+        # Determine Database Host
+        db_host = "127.0.0.1" if os.getenv("DB_HOST") is None else os.getenv("DB_HOST")
+        conn = mysql.connector.connect(
+            user="test",
+            password="test",
+            host=db_host,
+            port=3306,
+            database="LIBRARY"
+        )
+    except Exception as e:
+        print(e)
+        continue
+    else:
+        print("Connection to DB established.")
+        break
 
 # MySQL cursor
 cur = conn.cursor()

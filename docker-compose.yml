@@ -1,0 +1,29 @@
+services:
+  database:
+    build: ./database
+    container_name: library_database
+    ports:
+      - 3306:3306
+      - 3306:3306/udp
+    environment:
+      MARIADB_ROOT_PASSWORD: "test"
+    restart: unless-stopped
+  server:
+    build: ./server
+    container_name: library_server
+    ports:
+      - 8000:8000
+      - 8000:8000/udp
+    environment:
+      DB_HOST: "library_database"
+    restart: unless-stopped
+  client:
+    build:
+      context: ./client
+      args:
+        - SERVER_HOST=library_server
+    container_name: library_client
+    ports:
+      - 3000:3000
+      - 3000:3000/udp
+    restart: unless-stopped

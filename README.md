@@ -34,3 +34,17 @@ To get the system running, set up and run the components in the following order:
 1. database
 2. server
 3. client
+
+## Screenshots
+
+Login Page
+![Login Page](https://i.imgur.com/nd70xjo.png)
+
+Student Main Menu
+![Student Main Menu](https://i.imgur.com/xBjVKT0.png)
+
+Book Listing
+![Book Listing](https://i.imgur.com/harKRN3.png)
+
+Book Information
+![Book Information](https://i.imgur.com/xPbHUc8.png)
